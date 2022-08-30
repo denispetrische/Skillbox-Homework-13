@@ -1,0 +1,14 @@
+﻿<Window x:Class="Skillbox_Homework_13._1.DeleteBillWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Skillbox_Homework_13._1"
+        mc:Ignorable="d"
+        Title="DeleteBillWindow" Height="200" Width="300" MaxHeight="200" MinHeight="200" MaxWidth="300" MinWidth="300">
+    <Grid>
+        <Button Name="buttonDeleteDeposit" Content="Удалить депозитный счёт" HorizontalAlignment="Left" Margin="75,61,0,0" VerticalAlignment="Top" Width="161" Click="DeleteDeposit"/>
+        <Button Name="buttonDeleteNonDeposit" Content="Удалить недепозитный счёт" HorizontalAlignment="Left" VerticalAlignment="Top" Width="161" Click="DeleteNonDeposit" Margin="75,123,0,0"/>
+
+    </Grid>
+</Window>

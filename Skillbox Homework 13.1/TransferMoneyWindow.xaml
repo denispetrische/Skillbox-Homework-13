@@ -1,0 +1,69 @@
+﻿<Window x:Class="Skillbox_Homework_13._1.TransferMoneyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Skillbox_Homework_13._1"
+        mc:Ignorable="d"
+        Title="TransferMoneyWindow" Height="450" Width="800" MinHeight="450" MinWidth="800" MaxHeight="450" MaxWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="132*"/>
+            <ColumnDefinition Width="68*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="175*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="78*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="22*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.Row="1"><Run Text="Фамилия"/><Run Language="ru-ru" Text=":"/></TextBlock>
+        <TextBlock Grid.Column="2" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2" Grid.Row="1"><Run Text="Имя"/><Run Language="ru-ru" Text=":"/></TextBlock>
+        <TextBlock Grid.Column="4" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2" Grid.Row="1"><Run Language="ru-ru" Text="Отчество:"/></TextBlock>
+        <TextBlock Name="textblockSecondName" Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <TextBlock Name="textblockFirstName" Grid.Column="2" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2"/>
+        <TextBlock Name="textblockPatronymic" Grid.Column="4" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"><Run Language="ru-ru" Text="Счета клиента:"/></TextBlock>
+        <TextBlock Name="textblockBillName1" Grid.Column="2" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2"/>
+        <TextBlock Name="textblockBillName2" Grid.Column="4" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2"/>
+        <ListView Name="listView" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,32,32,0" Grid.RowSpan="8" SelectedItem="{}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding SecondName}"/>
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}"/>
+                    <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding Patronymic}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock Grid.Column="3" HorizontalAlignment="Center" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="93" Margin="0,62,0,0" Grid.RowSpan="2"><Run Language="ru-ru" Text="Счета клиента:"/></TextBlock>
+        <TextBlock Grid.Column="2" TextAlignment="Center" FontSize="15" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="200"><Run Language="ru-ru" Text="Получатель:"/></TextBlock>
+        <TextBlock Grid.Column="1" TextAlignment="Center" FontSize="15" HorizontalAlignment="Center" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Center" Width="200"><Run Language="ru-ru" Text="Отправитель:"/></TextBlock>
+        <TextBlock Name="clientbill1Name" Grid.Column="5" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="7" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <TextBlock Name="clientbill1Ammount" Grid.Column="6" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="7" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <TextBlock Name="clientbill2Name" Grid.Column="5" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="8" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <TextBlock Name="clientbill2Ammount" Grid.Column="6" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="8" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <RadioButton Name="radioReceiverBill1" GroupName="firstGroup" Content="Выбрать счет 1" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
+        <RadioButton Name="radioReceiverBill2" GroupName="firstGroup" Content="Выбрать счет 2" Grid.Column="4" HorizontalAlignment="Center" Margin="0,0,0,7" Grid.Row="4" Grid.ColumnSpan="2" Width="200"/>
+        <RadioButton Name="radioSenderBill1" GroupName="secondGroup" Grid.Column="4" HorizontalAlignment="Center" Grid.Row="7" VerticalAlignment="Center"/>
+        <RadioButton Name="radioSenderBill2" GroupName="secondGroup" Grid.Column="4" HorizontalAlignment="Center" Grid.Row="8" VerticalAlignment="Center"/>
+        <Button Name="buttonProceed" Content="Продолжить" Grid.Column="5" HorizontalAlignment="Center" Grid.Row="11" VerticalAlignment="Top" Width="175" Margin="0,13,0,0" Grid.RowSpan="2" Click="ButtonProceedPressed"/>
+        <TextBox Name="textboxTransferAmmount" Grid.Column="5" TextAlignment="Center" HorizontalAlignment="Center" Grid.Row="10" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="175" Height="26"/>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="122,23,0,0" Grid.Row="9" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="103" Grid.RowSpan="2"><Run Language="ru-ru" Text="Сумма перевода:"/></TextBlock>
+
+    </Grid>
+</Window>
