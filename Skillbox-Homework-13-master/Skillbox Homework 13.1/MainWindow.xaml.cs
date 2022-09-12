@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Skillbox_Homework_13._1.Classes;
 using Skillbox_Homework_13._1.Interfaces;
+using Skillbox_Homework_13._1.Displays;
 
 namespace Skillbox_Homework_13._1
 {
@@ -29,16 +30,24 @@ namespace Skillbox_Homework_13._1
         DeleteBillWindow deleteBillWindow = new DeleteBillWindow();
         AddMoneyWindow addMoneyWindow = new AddMoneyWindow();
         TransferMoneyWindow transferMoneyWindow = new TransferMoneyWindow();
+        NotificationWindow notificationWindow = new NotificationWindow();
 
         ObservableCollection<Client> clients = new ObservableCollection<Client>();
         ObservableCollection<ScreenInfo> screenInfo = new ObservableCollection<ScreenInfo>();
+
+        public ObservableCollection<string> clientInformation = new ObservableCollection<string>();
+
+        private delegate void someInfo(string message);
+        private event someInfo? someMessage; 
 
 
         public MainWindow()
         {
             InitializeComponent();
             listView.ItemsSource = screenInfo;
-            this.Closed += new EventHandler(ClosedWindow);           
+            this.Closed += new EventHandler(ClosedWindow);
+            Client.ClientNotification += NotificationHandler;
+            someMessage += NotificationHandler;
         }
 
         private void OpenAccount(object sender, RoutedEventArgs e)
@@ -60,6 +69,8 @@ namespace Skillbox_Homework_13._1
         {
             clients[listView.SelectedIndex].depositBill = new DepositBill(0);
 
+            someMessage?.Invoke($"{DateTime.Now} У клиента {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} открыт новый депозитный счёт");
+
             VisibleInformation();
 
             openBillWindow.Close();
@@ -68,6 +79,8 @@ namespace Skillbox_Homework_13._1
         private void NewNonDeposit(object sender, RoutedEventArgs e)
         {
             clients[listView.SelectedIndex].nonDepositBill = new NonDepositBill(0);
+
+            someMessage?.Invoke($"{DateTime.Now} У клиента {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} открыт новый недепозитный счёт");
 
             VisibleInformation();
 
@@ -93,6 +106,8 @@ namespace Skillbox_Homework_13._1
         {
             clients[listView.SelectedIndex].depositBill = new DefaultBill(0);
 
+            someMessage?.Invoke($"{DateTime.Now} У клиента {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} закрыт депозитный счёт");
+
             VisibleInformation();
 
             deleteBillWindow.Close();
@@ -101,6 +116,8 @@ namespace Skillbox_Homework_13._1
         private void DeleteNonDeposit(object sender, RoutedEventArgs e)
         {
             clients[listView.SelectedIndex].nonDepositBill = new DefaultBill(0);
+
+            someMessage?.Invoke($"{DateTime.Now} У клиента {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} закрыт недепозитный счёт");
 
             VisibleInformation();
 
@@ -197,7 +214,7 @@ namespace Skillbox_Homework_13._1
             {
                 if (transferMoneyWindow.radioSenderBill1.IsEnabled == false && transferMoneyWindow.radioSenderBill2.IsEnabled == false)
                 {
-                    MessageBox.Show("У выбранного клиента нет счетов с который можно перевести деньги");
+                    MessageBox.Show("У выбранного клиента нет счетов с которых можно перевести деньги");
                 }
                 else
                 {
@@ -219,7 +236,7 @@ namespace Skillbox_Homework_13._1
                         {
                             clients[listView.SelectedIndex] = clients[listView.SelectedIndex].Transfer(clients[transferMoneyWindow.listView.SelectedIndex].nonDepositBill,
                                                                  Convert.ToSingle(transferMoneyWindow.textboxTransferAmmount.Text),
-                                                                 "NonDepositBill");
+                                                                 "DepositBill");
 
                             if (clients[transferMoneyWindow.listView.SelectedIndex].nonDepositBill.Ammount >= Convert.ToSingle(transferMoneyWindow.textboxTransferAmmount.Text))
                             {
@@ -233,7 +250,7 @@ namespace Skillbox_Homework_13._1
                         {
                             clients[listView.SelectedIndex] = clients[listView.SelectedIndex].Transfer(clients[transferMoneyWindow.listView.SelectedIndex].depositBill,
                                                                  Convert.ToSingle(transferMoneyWindow.textboxTransferAmmount.Text),
-                                                                 "DepositBill");
+                                                                 "NonDepositBill");
 
                             if (clients[transferMoneyWindow.listView.SelectedIndex].depositBill.Ammount >= Convert.ToSingle(transferMoneyWindow.textboxTransferAmmount.Text))
                             {
@@ -296,12 +313,16 @@ namespace Skillbox_Homework_13._1
             {
                 IAddMoney<Bill> temp1 = clients[listView.SelectedIndex].depositBill;
                 clients[listView.SelectedIndex].depositBill = temp1.AddMoney(Convert.ToSingle(addMoneyWindow.textbox1.Text));
+
+                someMessage?.Invoke($"{DateTime.Now} Клиенту {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} на депозитный счёт поступило {addMoneyWindow.textbox1.Text} условных единиц");
             }
 
             if (addMoneyWindow.textbox2.IsEnabled)
             {
                 IAddMoney<Bill> temp2 = clients[listView.SelectedIndex].nonDepositBill;
                 clients[listView.SelectedIndex].nonDepositBill = temp2.AddMoney(Convert.ToSingle(addMoneyWindow.textbox2.Text));
+
+                someMessage?.Invoke($"{DateTime.Now} Клиенту {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} на недепозитный счёт поступило {addMoneyWindow.textbox2.Text} условных единиц");
             }
 
             VisibleInformation();
@@ -366,6 +387,15 @@ namespace Skillbox_Homework_13._1
 
                 screenInfo.Add(new ScreenInfo(item.SecondName, item.FirstName, item.Patronymic, depositBillAmmount, nonDepositBillAmmount));
             }
+        }
+
+        public void NotificationHandler(string message) => clientInformation.Add(message);
+
+        private void OpenNotificationWindow(object sender, RoutedEventArgs e)
+        {
+            notificationWindow = new NotificationWindow();
+            notificationWindow.listView.ItemsSource = clientInformation;
+            notificationWindow.Show();
         }
     }
 }

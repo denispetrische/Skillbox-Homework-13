@@ -50,5 +50,6 @@
         <DockPanel LastChildFill="True" Grid.Row="13" Margin="0,13,0,0" Grid.RowSpan="2">
             <TextBlock Name="statusBar" TextWrapping="Wrap" TextAlignment="Center"/>
         </DockPanel>
+        <Button Content="Журнал" Style="{DynamicResource RoundCorner}" Grid.Column="3" Grid.Row="12" VerticalAlignment="Bottom" Height="22" Click="OpenNotificationWindow" Margin="0,0,0,0" HorizontalAlignment="Left" Width="136"/>
     </Grid>
 </Window>
