@@ -311,18 +311,40 @@ namespace Skillbox_Homework_13._1
         {
             if (addMoneyWindow.textbox1.IsEnabled)
             {
-                IAddMoney<Bill> temp1 = clients[listView.SelectedIndex].depositBill;
-                clients[listView.SelectedIndex].depositBill = temp1.AddMoney(Convert.ToSingle(addMoneyWindow.textbox1.Text));
+                try
+                {
+                    IAddMoney<Bill> temp1 = clients[listView.SelectedIndex].depositBill;
+                    clients[listView.SelectedIndex].depositBill = temp1.AddMoney(Convert.ToSingle(addMoneyWindow.textbox1.Text));
 
-                someMessage?.Invoke($"{DateTime.Now} Клиенту {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} на депозитный счёт поступило {addMoneyWindow.textbox1.Text} условных единиц");
+                    someMessage?.Invoke($"{DateTime.Now} Клиенту {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} на депозитный счёт поступило {addMoneyWindow.textbox1.Text} условных единиц");
+                }
+                catch 
+                {
+                    MessageBox.Show("Введите число");
+                }
+                finally
+                {
+
+                }
             }
 
             if (addMoneyWindow.textbox2.IsEnabled)
             {
-                IAddMoney<Bill> temp2 = clients[listView.SelectedIndex].nonDepositBill;
-                clients[listView.SelectedIndex].nonDepositBill = temp2.AddMoney(Convert.ToSingle(addMoneyWindow.textbox2.Text));
+                try
+                {
+                    IAddMoney<Bill> temp2 = clients[listView.SelectedIndex].nonDepositBill;
+                    clients[listView.SelectedIndex].nonDepositBill = temp2.AddMoney(Convert.ToSingle(addMoneyWindow.textbox2.Text));
 
-                someMessage?.Invoke($"{DateTime.Now} Клиенту {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} на недепозитный счёт поступило {addMoneyWindow.textbox2.Text} условных единиц");
+                    someMessage?.Invoke($"{DateTime.Now} Клиенту {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} на недепозитный счёт поступило {addMoneyWindow.textbox2.Text} условных единиц");
+                }
+                catch
+                {
+                    MessageBox.Show("Введите число");
+                }
+                finally
+                {
+
+                }
             }
 
             VisibleInformation();
