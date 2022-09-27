@@ -14,8 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Skillbox_Homework_13._1.Classes;
-using Skillbox_Homework_13._1.Interfaces;
+using InterfaceLibrary;
 using Skillbox_Homework_13._1.Displays;
 
 namespace Skillbox_Homework_13._1
@@ -318,7 +317,7 @@ namespace Skillbox_Homework_13._1
 
                     someMessage?.Invoke($"{DateTime.Now} Клиенту {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} на депозитный счёт поступило {addMoneyWindow.textbox1.Text} условных единиц");
                 }
-                catch 
+                catch(Exception) 
                 {
                     MessageBox.Show("Введите число");
                 }
@@ -337,7 +336,7 @@ namespace Skillbox_Homework_13._1
 
                     someMessage?.Invoke($"{DateTime.Now} Клиенту {clients[listView.SelectedIndex].SecondName} {clients[listView.SelectedIndex].FirstName} {clients[listView.SelectedIndex].Patronymic} на недепозитный счёт поступило {addMoneyWindow.textbox2.Text} условных единиц");
                 }
-                catch
+                catch(Exception)
                 {
                     MessageBox.Show("Введите число");
                 }

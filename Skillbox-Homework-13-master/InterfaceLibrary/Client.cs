@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
 using System.Windows;
-using Skillbox_Homework_13._1.Interfaces;
 
-namespace Skillbox_Homework_13._1.Classes
+namespace InterfaceLibrary
 {
-    class Client : ITransfer<Bill>
+    public class Client : ITransfer<Bill>
     {
         public delegate void ClientInformation(string message);
 

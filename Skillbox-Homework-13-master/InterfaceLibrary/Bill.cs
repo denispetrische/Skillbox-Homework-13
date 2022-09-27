@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Skillbox_Homework_13._1.Interfaces;
-
-namespace Skillbox_Homework_13._1.Classes
+﻿
+namespace InterfaceLibrary
 {
     public class Bill : IAddMoney<Bill>
     {
