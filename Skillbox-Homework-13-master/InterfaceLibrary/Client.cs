@@ -40,7 +40,7 @@ namespace InterfaceLibrary
                 }
                 else
                 {
-                    MessageBox.Show("Недостаточно средств для перевода");
+                    
                 }
             }
 
@@ -54,7 +54,7 @@ namespace InterfaceLibrary
                 }
                 else
                 {
-                    MessageBox.Show("Недостаточно средств для перевода");
+                    
                 }
             }
 
